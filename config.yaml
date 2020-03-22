@@ -1,0 +1,23 @@
+project:
+  base_folder: "G:\\Developpement\\"
+  types:
+    default:
+      folder: 'python\\test_folder'
+      exec: 'phpstorm'
+    php:
+      folder: 'python\\test_folder'
+      exec: 'phpstorm'
+    python:
+      folder: 'python\\test_folder'
+      exec: 'pycharm'
+      gitignore_template: 'Python' # see https://github.com/github/gitignore
+
+vcs:
+  gitignore:
+      - '###> darkanakin41/project-management'
+      - '.idea'
+      - '###< darkanakin41/project-management'
+  github:
+    user: "darkanakin41"
+    base_url: "https://github.com"
+    token: "5f4b31fdd57286796dd241c1378879d78dcef510"
