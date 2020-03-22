@@ -1,23 +1,17 @@
 project:
-  base_folder: "G:\\Developpement\\"
-  types:
-    default:
-      folder: 'python\\test_folder'
-      exec: 'phpstorm'
+  base_folder: "G:\\Developpement\\" # The base folder in which to create the project
+  types: # You can add as many as you want with names that you want
     php:
-      folder: 'python\\test_folder'
-      exec: 'phpstorm'
-    python:
-      folder: 'python\\test_folder'
-      exec: 'pycharm'
-      gitignore_template: 'Python' # see https://github.com/github/gitignore
+      folder: 'python' # the subfolder in which create the project
+      exec: 'pycharm' # a command to execute after creating the project
+      gitignore_template: 'Python' # see https://github.com/github/gitignore, we'll be used in gitignore generation
 
 vcs:
-  gitignore:
-      - '###> darkanakin41/project-management'
+  gitignore: # Used to add default items into the generated gitignore
+      - '###> darkanakin41/project-generator'
       - '.idea'
-      - '###< darkanakin41/project-management'
-  github:
-    user: "darkanakin41"
+      - '###< darkanakin41/project-generator'
+  github: # It support only github at the moment
+    user: "darkanakin41" # your github user
     base_url: "https://github.com"
-    token: "5f4b31fdd57286796dd241c1378879d78dcef510"
+    token: "5f4b31fdd57286796dd241c1378879d78dcef510" # your github access token

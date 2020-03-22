@@ -11,3 +11,12 @@ and even initialize the project on your version management system if you want to
 ```bash
 pip install -r requirements-dev.txt
 ```
+
+# Github Token Access
+The token needs to have the full repo scop :
+* repo:status
+* repo:invite
+* repo_deployment
+* public_repo
+
+
