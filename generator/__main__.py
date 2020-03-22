@@ -39,7 +39,7 @@ if vcs_type == 'github':
     project.add_file('README.md', '\n'.join([
         repo_name,
         '===',
-        'This project have been generated with [darkanakin41/project-management](https://github.com/darkanakin41/project-management)'
+        'This project have been generated with [darkanakin41/project-generator](https://github.com/darkanakin41/project-generator)'
     ]))
 
     project.init_git(repo_url)
