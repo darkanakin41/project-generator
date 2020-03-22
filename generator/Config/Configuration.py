@@ -10,7 +10,7 @@ class Configuration:
 
     def __init__(self):
         self.config = None
-        config_file = os.path.join(Configuration.__base_folder__(), "config.yaml")
+        config_file = os.path.join(Configuration.__base_folder__(), "config.yaml.dist")
         with open(config_file, "r") as stream:
             try:
                 self.config = yaml.safe_load(stream)
