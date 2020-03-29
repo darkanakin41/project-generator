@@ -1,6 +1,7 @@
 import os
 
-from Config.Configuration import Configuration
+from config.configuration import Configuration
+from tools.template import Template
 
 
 class ProjectConfiguration(Configuration):
@@ -81,3 +82,25 @@ class ProjectConfiguration(Configuration):
         :return: string
         """
         return self.get_type_configuration(project_type).get('gitignore_template')
+
+    def get_templates(self, project_type):
+        """
+        Get the gitignore template
+        :param project_type: the type of the project
+        :return: string
+        """
+        return self.get_type_configuration(project_type).get('templates')
+
+    def get_template(self, project_type, template):
+        """
+        Get the gitignore template
+        :param project_type: the type of the project
+        :param template: the type of the project
+        :return: Template | None
+        """
+        if self.get_type_configuration(project_type).get('templates') is None:
+            return None
+        template_configuration = self.get_type_configuration(project_type).get('templates').get(template)
+        if template_configuration is None:
+            return None
+        return Template(project_type, template, template_configuration)

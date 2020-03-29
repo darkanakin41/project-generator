@@ -3,13 +3,14 @@
 import argparse
 import webbrowser
 
-from Entity.Project import Project
-from Tools.GitHubManagement import GitHubManagement
+from entity.project import Project
+from tools.gitHubManagement import GitHubManagement
 
 parser = argparse.ArgumentParser()
 parser.add_argument("name", help="The name of the project you want to create")
-parser.add_argument("--type", help="The name of the project you want to create")
+parser.add_argument("--type", help="The name of the project you want to create  (default: default)", default="default")
 parser.add_argument("--vcs", help="The version control system to use")
+parser.add_argument("--template", help="The template to copy (default: default)", default="default")
 args = parser.parse_args()
 
 project_name = args.name
@@ -22,6 +23,8 @@ if args.vcs:
 
 project = Project(project_name, project_type)
 project.create_dirs()
+project.copy_template(args.template)
+
 if vcs_type is not None:
     if project.is_vcs_initialized():
         print('VCS initialized')
@@ -48,4 +51,4 @@ if vcs_type == 'github':
         repo_name
     ]))
 
-project.exec_command()
+project.exec_commands()

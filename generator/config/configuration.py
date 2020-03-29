@@ -2,6 +2,7 @@ import os
 
 import yaml
 
+
 class Configuration:
 
     @staticmethod
@@ -20,3 +21,6 @@ class Configuration:
             print("Please provide the right configuration")
             exit()
 
+    @staticmethod
+    def get_template_directory():
+        return os.path.join(Configuration.__base_folder__(), "templates")

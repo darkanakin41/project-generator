@@ -5,6 +5,9 @@ project:
       folder: 'python' # the subfolder in which create the project
       exec: 'pycharm' # a command to execute after creating the project
       gitignore_template: 'Python' # see https://github.com/github/gitignore, we'll be used in gitignore generation
+      templates: # a list of templates available for the given type
+        on_disk: "path/to/template"
+        from_git: "git@github.com:darkanakin41/symfony-template.git"
 
 vcs:
   gitignore: # Used to add default items into the generated gitignore

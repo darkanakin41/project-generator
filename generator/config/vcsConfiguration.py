@@ -1,4 +1,4 @@
-from Config.Configuration import Configuration
+from config.configuration import Configuration
 
 
 class VCSConfiguration(Configuration):

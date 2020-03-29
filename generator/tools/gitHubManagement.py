@@ -1,7 +1,7 @@
 from github import Github, GithubException
 
-from Config import vcsConfiguration, projectConfiguration
-from Entity.Project import Project
+from config import vcsConfiguration, projectConfiguration
+from entity.project import Project
 
 
 class GitHubManagement:
