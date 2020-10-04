@@ -5,7 +5,7 @@ from distutils.dir_util import copy_tree
 
 from git import Repo, Git
 
-from config.configuration import Configuration
+from generator.config.configuration import Configuration
 
 
 class Template:

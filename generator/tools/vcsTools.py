@@ -1,4 +1,4 @@
-from .gitHubManagement import GitHubManagement
+from generator.tools.gitHubManagement import GitHubManagement
 
 
 class VCSTools:

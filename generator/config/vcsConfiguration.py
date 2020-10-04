@@ -1,4 +1,4 @@
-from config.configuration import Configuration
+from generator.config.configuration import Configuration
 
 
 class VCSConfiguration(Configuration):

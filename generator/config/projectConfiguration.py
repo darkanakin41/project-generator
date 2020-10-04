@@ -1,7 +1,7 @@
 import os
 
-from config.configuration import Configuration
-from tools.template import Template
+from generator.config.configuration import Configuration
+from generator.tools.template import Template
 
 
 class ProjectConfiguration(Configuration):

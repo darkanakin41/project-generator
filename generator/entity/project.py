@@ -1,8 +1,8 @@
 import os
 import pathlib
-from distutils.dir_util import copy_tree
+from configparser import NoSectionError
 
-from config import projectConfiguration
+from generator.config import projectConfiguration
 from git import Repo, InvalidGitRepositoryError
 
 
@@ -94,14 +94,14 @@ class Project:
             repo = Repo(self.get_project_dir())
             print('[GIT] This is already a git repository')
             return
-        except InvalidGitRepositoryError as exc:
+        except InvalidGitRepositoryError:
             repo = Repo.init(self.get_project_dir())
             print('[GIT] git init the repository')
 
         try:
             origin = repo.remote('origin')
             print('[GIT] Retrieving the origin remote')
-        except ValueError as exc:
+        except NoSectionError:
             origin = repo.create_remote('origin', repo_url)
             print('[GIT] Adding the remote "origin" : {}'.format(repo_url))
 
