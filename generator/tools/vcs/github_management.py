@@ -2,7 +2,7 @@ from github import Github, GithubException
 
 from generator.config import vcs_configuration, project_configuration
 from generator.entity.project import Project
-from tools.vcs.vcs_management import VCSManagement
+from generator.tools.vcs.vcs_management import VCSManagement
 
 
 class GitHubManagement(VCSManagement):

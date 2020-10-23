@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 
-from config import project_configuration, vcs_configuration
-from entity.project import Project
+from generator.config import project_configuration, vcs_configuration
+from generator.entity.project import Project
 
 
 class VCSManagement(ABC):
