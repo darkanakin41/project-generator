@@ -1,9 +1,13 @@
 import os
+import sys
 
 import yaml
 
 
 class Configuration:
+    """
+    Management of the configuration file
+    """
 
     @staticmethod
     def __base_folder__():
@@ -19,8 +23,12 @@ class Configuration:
                 print(exc)
         if self.config is None:
             print("Please provide the right configuration")
-            exit()
+            sys.exit()
 
     @staticmethod
     def get_template_directory():
+        """
+        Retrieve the template directory
+        :return:
+        """
         return os.path.join(Configuration.__base_folder__(), "templates")

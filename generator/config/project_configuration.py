@@ -1,15 +1,20 @@
 import os
+import sys
 
 from generator.config.configuration import Configuration
 from generator.tools.template import Template
 
 
 class ProjectConfiguration(Configuration):
+    """
+    Tools to get project configuration
+    """
+
     def __init__(self):
         super().__init__()
         if self.config.get('project') is None:
             print("Please provide the project configuration")
-            exit()
+            sys.exit()
 
     def get_configuration(self):
         """
@@ -27,7 +32,7 @@ class ProjectConfiguration(Configuration):
         """
         if self.get_configuration().get('types') is None:
             print("Please provide the project configuration")
-            exit()
+            sys.exit()
         return self.get_configuration().get('types')
 
     def get_type_configuration(self, project_type):
@@ -38,7 +43,7 @@ class ProjectConfiguration(Configuration):
         """
         if self.get_types_configuration().get(project_type) is None:
             print("Type {} is missing in configuration".format(project_type))
-            exit()
+            sys.exit()
         return self.get_types_configuration().get(project_type)
 
     # UTILITIES METHODS
@@ -50,7 +55,7 @@ class ProjectConfiguration(Configuration):
         """
         if self.get_configuration().get('base_folder') is None:
             print("project.base_folder is missing from configuration file")
-            exit()
+            sys.exit()
         return self.config.get('project').get('base_folder')
 
     def get_folder(self, name, project_type):
@@ -63,7 +68,7 @@ class ProjectConfiguration(Configuration):
         project_type_folder = self.get_type_configuration(project_type).get('folder')
         if project_type_folder is None:
             print("project.folder is missing from configuration file")
-            exit()
+            sys.exit()
 
         return os.path.join(self.get_base_folder(), project_type_folder, name)
 
@@ -90,6 +95,14 @@ class ProjectConfiguration(Configuration):
         :return: string
         """
         return self.get_type_configuration(project_type).get('templates')
+
+    def get_git_configuration(self, project_type) -> dict:
+        """
+        Get the gitignore template
+        :param project_type: the type of the project
+        :return: Dict
+        """
+        return self.get_type_configuration(project_type).get('git')
 
     def get_template(self, project_type, template):
         """

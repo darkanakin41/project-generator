@@ -2,11 +2,15 @@ import os
 import pathlib
 from configparser import NoSectionError
 
-from generator.config import projectConfiguration
 from git import Repo, InvalidGitRepositoryError
+
+from generator.config import project_configuration
 
 
 class Project:
+    """
+    Class to describe and manage a project
+    """
 
     def __init__(self, name, project_type):
         self.name = name
@@ -26,7 +30,7 @@ class Project:
         Retrieve the base project folder dir from the configuration
         :return: string the folder
         """
-        return projectConfiguration.get_folder(self.name, self.type)
+        return project_configuration.get_folder(self.name, self.type)
 
     def create_dirs(self):
         """
@@ -45,7 +49,7 @@ class Project:
         Execute the commands
         :return: void
         """
-        commands = projectConfiguration.get_exec_command(self.type)
+        commands = project_configuration.get_exec_command(self.type)
         if commands is not None and isinstance(commands, str):
             self._exec_command(commands)
         elif commands is not None and isinstance(commands, list):
@@ -84,7 +88,7 @@ class Project:
         with open(os.path.join(project_dir, filename), "w") as stream:
             stream.write(content)
 
-    def init_git(self, repo_url):
+    def init_git(self, repo_url: str = None):
         """
         Init the git repository in the folder
         :param repo_url: the url of the repository
@@ -98,12 +102,15 @@ class Project:
             repo = Repo.init(self.get_project_dir())
             print('[GIT] git init the repository')
 
-        try:
-            origin = repo.remote('origin')
-            print('[GIT] Retrieving the origin remote')
-        except NoSectionError:
-            origin = repo.create_remote('origin', repo_url)
-            print('[GIT] Adding the remote "origin" : {}'.format(repo_url))
+        self._update_git_config(repo)
+
+        if repo_url is not None:
+            try:
+                origin = repo.remote('origin')
+                print('[GIT] Retrieving the origin remote')
+            except NoSectionError:
+                origin = repo.create_remote('origin', repo_url)
+                print('[GIT] Adding the remote "origin" : {}'.format(repo_url))
 
         if len(repo.untracked_files) > 0:
             repo.git.add('.')
@@ -111,8 +118,9 @@ class Project:
         if repo.is_dirty():
             print('[GIT] Initial commit')
             repo.git.commit('-m "Initial commit"')
-            print('[GIT] Pushing files to remote')
-            repo.git.push("--set-upstream", origin, repo.head.ref)
+            if origin is not None:
+                print('[GIT] Pushing files to remote')
+                repo.git.push("--set-upstream", origin, repo.head.ref)
 
     def copy_template(self, template_name):
         """
@@ -125,10 +133,20 @@ class Project:
             print("[TEMPLATE] Unable to copy template because project is already initialized")
             return
 
-        template = projectConfiguration.get_template(self.type, template_name)
+        template = project_configuration.get_template(self.type, template_name)
 
         if template is None:
             print("[TEMPLATE] {} is not defined in {} configuration".format(template_name, self.type))
             return
 
         template.copy(self.get_project_dir())
+
+    def _update_git_config(self, repo: Repo):
+        if project_configuration.get_git_configuration(self.type) is None:
+            return
+
+        configuration = project_configuration.get_git_configuration(self.type)
+        for section_key in configuration.keys():
+            section = configuration[section_key]
+            for option_key in section.keys():
+                repo.config_writer().set_value(section_key, option_key, section[option_key])

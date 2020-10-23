@@ -1,5 +1,5 @@
-from generator.config.projectConfiguration import ProjectConfiguration
-from generator.config.vcsConfiguration import VCSConfiguration
+from generator.config.project_configuration import ProjectConfiguration
+from generator.config.vcs_configuration import VCSConfiguration
 
-projectConfiguration = ProjectConfiguration()
-vcsConfiguration = VCSConfiguration()
+project_configuration = ProjectConfiguration()
+vcs_configuration = VCSConfiguration()

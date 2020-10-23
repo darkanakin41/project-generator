@@ -1,13 +1,17 @@
+import sys
+
 from generator.config.configuration import Configuration
 
 
 class VCSConfiguration(Configuration):
-
+    """
+    Tools to get vcs configuration
+    """
     def __init__(self):
         super().__init__()
         if self.config.get('vcs') is None:
             print("Please provide the vcs configuration")
-            exit()
+            sys.exit()
 
     def get_configuration(self):
         """
@@ -25,7 +29,7 @@ class VCSConfiguration(Configuration):
 
         if self.get_configuration().get(vcs_type) is None:
             print("vcs.{} is missing from configuration file".format(vcs_type))
-            exit()
+            sys.exit()
         return self.get_configuration().get(vcs_type)
 
     def get_gitignore(self):
@@ -36,5 +40,5 @@ class VCSConfiguration(Configuration):
         gitignore = self.get_configuration().get('gitignore')
         if gitignore is None:
             print("vcs.{} is missing from configuration file".format('gitignore'))
-            exit()
+            sys.exit()
         return gitignore
