@@ -108,7 +108,7 @@ class Project:
             try:
                 origin = repo.remote('origin')
                 print('[GIT] Retrieving the origin remote')
-            except NoSectionError:
+            except ValueError:
                 origin = repo.create_remote('origin', repo_url)
                 print('[GIT] Adding the remote "origin" : {}'.format(repo_url))
 
